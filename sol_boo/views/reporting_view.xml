@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <data>
+
+        <record id="report_reporting_boo_form_view" model="ir.ui.view">
+            <field name="name">reporting.boo.form</field>
+            <field name="model">reporting.boo</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <group>
+                        <field name="type" required="1"/>
+                    </group>
+                    <group >
+                        <label for="date_from" string="Period" />
+                        <div class="o_row">
+                            <field name="date_from" required="1" />
+                            <span> to </span>
+                            <field name="date_to" required="1" />
+                        </div>
+                    </group>
+                    <group>
+                        <field name="product_ids" widget="many2many_tags" attrs="{'invisible' : [('type','!=','chemical_catridge')]}"/>
+                        <field name="warehouse_id" widget="many2many_tags" attrs="{'invisible' : [('type','!=','water_prod')]}"/>
+                    </group>
+                    <footer>
+                        <button name="download_report" string="Print" type="object" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_report_reporting_boo" model="ir.actions.act_window">
+            <field name="name">Generate Report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">reporting.boo</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
