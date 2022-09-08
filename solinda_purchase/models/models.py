@@ -131,3 +131,11 @@ class PurchaseOrder(models.Model):
     def create(self, vals):
         vals['name'] = self.env['ir.sequence'].next_by_code('purchase.order.req')
         return super(PurchaseOrder, self).create(vals)
+
+    @api.model
+    def _prepare_picking(self):
+        vals = super(PurchaseOrder, self)._prepare_picking()
+        vals.update({
+            'location_dest_id': self.location_id.id
+            })
+        return vals
