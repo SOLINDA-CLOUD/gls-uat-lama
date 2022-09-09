@@ -9,12 +9,9 @@
             <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
             <field name="arch" type="xml">
                 <button name="button_to_approve" position="after">
-                    <button string="Approve" name="action_approve_gm" type="object" class="oe_highlight" states="to_approve"
-                    groups="purchase_request.group_purchase_request_manager"/>
+                    <button string="Approve" name="action_approve_gm" type="object" class="oe_highlight" states="to_approve" groups="purchase_request.group_purchase_request_manager"/>
                     <!-- <button string="Approve dir" name="button_approved" type="object" class="oe_highlight" attrs="{'invisible':['|',('qty_is_bigger','=',False),('state','!=','approved_gm')]}"/> -->
                 </button>
-
-
 
                 <xpath expr="//button[@name='button_approved']" position="attributes">
                     <attribute name="states" remove="to_approve"/>
@@ -31,7 +28,7 @@
 
                 <field name="group_id" position="after">
                     <field name="qty_is_bigger" invisible="0" />
-                    <field name="project_code" force_save="1"/>
+                    <field name="project_code" force_save="1" attrs="{'readonly': [('create_directly','=', False)]}" />
                 </field>
 
                 <xpath expr="//field[@name='line_ids']/tree/field[@name='product_qty']" position="after">

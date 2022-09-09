@@ -28,6 +28,7 @@ class PurchaseRequestLine(models.Model):
     ### ADDING CODE ###
     project_code_id = fields.Many2one(string='Project Code', comodel_name='project.code.pr', ondelete='restrict')
     budget_code_pr = fields.Char(string='Budget Code')
+    project_code = fields.Char('Project Code',related="request_id.project_code",store=True)
 
     name = fields.Char(string="Description", tracking=True)
     product_uom_id = fields.Many2one(

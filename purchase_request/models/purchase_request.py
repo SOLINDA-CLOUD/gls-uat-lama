@@ -113,6 +113,7 @@ class PurchaseRequest(models.Model):
         string="Product",
         readonly=True,
     )
+    project_code = fields.Char('Project Code')
     state = fields.Selection(
         selection=_STATES,
         string="Status",

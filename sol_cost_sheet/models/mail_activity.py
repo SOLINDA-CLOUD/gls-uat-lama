@@ -6,9 +6,7 @@ class MailActivity(models.Model):
     
     def action_close_dialog(self):
         res = super(MailActivity, self).action_close_dialog()
-        active_ids = self.env.context.get('active_ids', [])
-        print("=======ACTIVE_IDS==========",active_ids)
-        if self.activity_type_id.name in ['RAB / Cost Sheet']:
-            create_rab = self.env["cost.sheet"].create({"crm_id": self.id,'partner_id':self.partner_id.id})
-        print("RAB===============================")
+        if self.activity_type_id.name in ['RAB / Cost Sheet'] and self.res_model == 'crm.lead':
+            crm_id = self.env["crm.lead"].search([("id", "=",self.res_id)])
+            create_rab = self.env["cost.sheet"].create({"crm_id": self.res_id,'partner_id':crm_id.partner_id.id})
         return res

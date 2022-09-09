@@ -37,6 +37,7 @@
         'views/rap_views.xml',
         'views/approval_views.xml',
         'views/purchase_request_views.xml',
+        'views/purchase_order.xml',
         'views/account_move.xml',
         'wizard/rap_report.xml',
         'report/report_quotation_turnkey.xml',

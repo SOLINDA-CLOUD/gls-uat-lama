@@ -13,4 +13,4 @@ from . import cost_sheet
 from . import components
 from . import purchase_request_line_make_purchase_order
 from . import account_analytic_account
-# from . import mail_activity
+from . import mail_activity
