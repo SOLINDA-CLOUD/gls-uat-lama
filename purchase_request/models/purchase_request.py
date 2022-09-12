@@ -282,13 +282,13 @@ class PurchaseRequest(models.Model):
         self.ensure_one()
         return self.state == "draft"
 
-    def unlink(self):
-        for request in self:
-            if not request._can_be_deleted():
-                raise UserError(
-                    _("You cannot delete a purchase request which is not draft.")
-                )
-        return super(PurchaseRequest, self).unlink()
+    # def unlink(self):
+    #     for request in self:
+    #         if not request._can_be_deleted():
+    #             raise UserError(
+    #                 _("You cannot delete a purchase request which is not draft.")
+    #             )
+    #     return super(PurchaseRequest, self).unlink()
 
     def button_draft(self):
         self.mapped("line_ids").do_uncancel()
