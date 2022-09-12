@@ -81,6 +81,7 @@ class CostSheetXlsx(models.AbstractModel):
 
             row += 1
             no += 1
+            sub_no = 1
         
         sub_no = 1
         data_ga = obj.ga_project_line_ids
