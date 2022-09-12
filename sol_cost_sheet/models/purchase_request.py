@@ -16,11 +16,11 @@ class PurchaseRequest(models.Model):
     qty_is_bigger = fields.Boolean(compute='_compute_qty_is_bigger', string='Qty Is Bigger')
     project_code = fields.Char('Project Code',store=True)
     
-    state = fields.Selection(selection_add=[
-    ("to_approve", "Waiting Approval GM/PM"),
-    ("approved_gm", "Approved GM/PM"),
-    ("approved",)],
-    ondelete={'approved_gm': 'cascade', 'approved_dir': 'cascade'})
+    # state = fields.Selection(selection_add=[
+    # ("to_approve", "Waiting Approval GM/PM"),
+    # ("approved_gm", "Approved GM/PM"),
+    # ("approved",)],
+    # ondelete={'approved_gm': 'cascade', 'approved_dir': 'cascade'})
     
     
     def action_approve_gm(self):

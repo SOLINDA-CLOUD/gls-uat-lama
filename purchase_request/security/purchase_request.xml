@@ -14,25 +14,37 @@
     </record>
 
     <record id="group_purchase_request_approval1" model="res.groups">
-        <field name="name">Tahap 1</field>
+        <field name="name">User</field>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
         <field name="category_id" ref="module_category_purchase_request_approval" />
     </record>
 
     <record id="group_purchase_request_approval2" model="res.groups">
-        <field name="name">Tahap 2</field>
+        <field name="name">PM</field>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
         <field name="category_id" ref="module_category_purchase_request_approval" />
     </record>
 
     <record id="group_purchase_request_approval3" model="res.groups">
-        <field name="name">Tahap 3</field>
+        <field name="name">Atasan</field>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
         <field name="category_id" ref="module_category_purchase_request_approval" />
     </record>
 
     <record id="group_purchase_request_approval4" model="res.groups">
-        <field name="name">Tahap 3.2</field>
+        <field name="name">GM</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="category_id" ref="module_category_purchase_request_approval" />
+    </record>
+
+    <record id="group_purchase_request_approval5" model="res.groups">
+        <field name="name">Direksi</field>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="category_id" ref="module_category_purchase_request_approval" />
+    </record>
+
+    <record id="group_purchase_request_approval6" model="res.groups">
+        <field name="name">Direktur Utama</field>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
         <field name="category_id" ref="module_category_purchase_request_approval" />
     </record>

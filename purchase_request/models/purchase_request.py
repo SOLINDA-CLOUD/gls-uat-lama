@@ -6,7 +6,8 @@ from odoo.exceptions import UserError
 
 _STATES = [
     ("draft", "Draft"),
-    ("to_approve", "To be approved"),
+    ("to_approve", "Waiting Approval"),
+    ("to_approve_gm", "Approved PM/Atasan"),
     ("approved", "Approved"),
     ("rejected", "Rejected"),
     ("done", "Done"),
@@ -62,8 +63,7 @@ class PurchaseRequest(models.Model):
     is_name_editable = fields.Boolean(
         default=lambda self: self.env.user.has_group("base.group_no_one"),
     )
-    create_directly = fields.Boolean('Create Directly')
-    pre_order = fields.Boolean('Pre Order')
+    
     origin = fields.Char(string="Source Document")
     date_start = fields.Date(
         string="Creation date",
@@ -122,6 +122,7 @@ class PurchaseRequest(models.Model):
         required=True,
         copy=False,
         default="draft",
+        ondelete={'approved_gm': 'cascade', 'approved_dir': 'cascade'}
     )
     is_editable = fields.Boolean(compute="_compute_is_editable", readonly=True)
     to_approve_allowed = fields.Boolean(compute="_compute_to_approve_allowed")
@@ -155,6 +156,13 @@ class PurchaseRequest(models.Model):
         store=True,
     )
     project_name = fields.Char(string='Project Name')
+
+    # Additional Fields For Approval 
+    qty_is_bigger = fields.Boolean(string='Qty Is Bigger')
+    project_code = fields.Char('Project Code',store=True)
+    is_atasan = fields.Boolean('Is Atasan')
+    create_directly = fields.Boolean('Create Directly')
+    pre_order = fields.Boolean('Pre Order')
 
     @api.depends("line_ids", "line_ids.estimated_cost")
     def _compute_estimated_cost(self):
@@ -278,8 +286,12 @@ class PurchaseRequest(models.Model):
         self.to_approve_allowed_check()
         return self.write({"state": "to_approve"})
 
+    def button_approved_gm(self):
+        return self.write({"state": "to_approve_gm"})
+
     def button_approved(self):
         return self.write({"state": "approved"})
+
 
     def button_rejected(self):
         self.mapped("line_ids").do_cancel()
