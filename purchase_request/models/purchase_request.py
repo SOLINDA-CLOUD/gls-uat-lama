@@ -167,7 +167,7 @@ class PurchaseRequest(models.Model):
     def _get_is_atasan(self):
         for i in self:
             if i.requested_by.employee_id:
-                if i.requested_by.employee_id.parent_id.id == i.env.user.employee_id.id
+                if i.requested_by.employee_id.parent_id.id == i.env.user.employee_id.id:
                     i.is_atasan = True
                 else:
                     i.is_atasan = False
@@ -281,13 +281,13 @@ class PurchaseRequest(models.Model):
         self.ensure_one()
         return self.state == "draft"
 
-    # def unlink(self):
-    #     for request in self:
-    #         if not request._can_be_deleted():
-    #             raise UserError(
-    #                 _("You cannot delete a purchase request which is not draft.")
-    #             )
-    #     return super(PurchaseRequest, self).unlink()
+    def unlink(self):
+        for request in self:
+            if not request._can_be_deleted():
+                raise UserError(
+                    _("You cannot delete a purchase request which is not draft.")
+                )
+        return super(PurchaseRequest, self).unlink()
 
     def button_draft(self):
         self.mapped("line_ids").do_uncancel()
