@@ -9,6 +9,7 @@ _STATES = [
     ("to_approve", "Waiting Approval"),
     ("to_approve_gm", "Approved PM/Atasan"),
     ("approved", "Approved"),
+    ("procurement", "Procurement"),
     ("rejected", "Rejected"),
     ("done", "Done"),
 ]
@@ -307,6 +308,9 @@ class PurchaseRequest(models.Model):
     def button_rejected(self):
         self.mapped("line_ids").do_cancel()
         return self.write({"state": "rejected"})
+
+    def button_procurement(self):
+        return self.write({"state": "procurement"})
 
     def button_done(self):
         return self.write({"state": "done"})
