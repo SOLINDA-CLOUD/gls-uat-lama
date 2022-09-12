@@ -50,7 +50,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
         for line in self.env["purchase.request.line"].browse(request_line_ids):
             if line.request_id.state == "done":
                 raise UserError(_("The purchase has already been completed."))
-            if line.request_id.state != "approved":
+            if line.request_id.state != "procurement":
                 raise UserError(
                     _("Purchase Request %s is not approved") % line.request_id.name
                 )
