@@ -82,31 +82,40 @@ class CostSheetXlsx(models.AbstractModel):
             row += 1
             no += 1
         
+        sub_no = 1
         data_ga = obj.ga_project_line_ids
+        worksheet.write(row, 0, no, style_basic_bold_center)
+        worksheet.write(row, 1, "GA Project", style_basic_bold)
         for rec in data_ga:
-            worksheet.write(row, 0, no, style_basic_bold_center)
-            worksheet.write(row, 1, rec.product_id.name, style_basic_bold)
-            worksheet.write(row, 4, rec.product_qty, style_basic_center)
-            # worksheet.write(row, 5, rec.uom_id.name, style_basic_center)
-            worksheet.write(row, 6, rec.existing_price, style_basic_center)
-            worksheet.write(row, 7, rec.rfq_price, style_basic_center)
-            worksheet.write(row, 8, rec.total_price, style_basic_center)
-            worksheet.write(row, 9, rec.remarks or "", style_basic_center)
+            worksheet.write(row + 1, 1, "%s.%s" % (no,sub_no), style_basic_bold_center)
+            worksheet.write(row + 1, 2, rec.product_id.name, style_basic_bold)
+            worksheet.write(row + 1, 4, rec.product_qty, style_basic_center)
+            worksheet.write(row + 1, 6, rec.existing_price, style_basic_center)
+            worksheet.write(row + 1, 7, rec.rfq_price, style_basic_center)
+            worksheet.write(row + 1, 8, rec.total_price, style_basic_center)
+            worksheet.write(row + 1, 9, rec.remarks or "", style_basic_center)
             row += 1
-            no += 1
+            sub_no += 1
+        row += 1
+        no += 1
+        sub_no = 1
 
         data_waranty = obj.waranty_line_ids
+        worksheet.write(row, 0, no, style_basic_bold_center)
+        worksheet.write(row, 1, "Warranty", style_basic_bold)
         for rec in data_waranty:
-            worksheet.write(row, 0, no, style_basic_bold_center)
-            worksheet.write(row, 1, rec.product_id.name, style_basic_bold)
-            worksheet.write(row, 4, rec.product_qty, style_basic_center)
-            # worksheet.write(row, 5, rec.uom_id.name, style_basic_center)
-            worksheet.write(row, 6, rec.existing_price, style_basic_center)
-            worksheet.write(row, 7, rec.rfq_price, style_basic_center)
-            worksheet.write(row, 8, rec.total_price, style_basic_center)
-            worksheet.write(row, 9, rec.remarks or "", style_basic_center)
+            worksheet.write(row + 1, 1, "%s.%s" % (no,sub_no), style_basic_bold_center)
+            worksheet.write(row + 1, 2, rec.product_id.name, style_basic_bold)
+            worksheet.write(row + 1, 4, rec.product_qty, style_basic_center)
+            worksheet.write(row + 1, 6, rec.existing_price, style_basic_center)
+            worksheet.write(row + 1, 7, rec.rfq_price, style_basic_center)
+            worksheet.write(row + 1, 8, rec.total_price, style_basic_center)
+            worksheet.write(row + 1, 9, rec.remarks or "", style_basic_center)
             row += 1
-            no += 1
+            sub_no += 1
+        row += 1
+        no += 1
+        sub_no = 1
 
         # print(ea)
 
