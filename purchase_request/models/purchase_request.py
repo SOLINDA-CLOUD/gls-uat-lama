@@ -160,9 +160,20 @@ class PurchaseRequest(models.Model):
     # Additional Fields For Approval 
     qty_is_bigger = fields.Boolean(string='Qty Is Bigger')
     project_code = fields.Char('Project Code',store=True)
-    is_atasan = fields.Boolean('Is Atasan')
+    is_atasan = fields.Boolean('Is Atasan',compute="_get_is_atasan")
     create_directly = fields.Boolean('Create Directly')
     pre_order = fields.Boolean('Pre Order')
+
+    def _get_is_atasan(self):
+        for i in self:
+            if i.requested_by.employee_id:
+                if i.requested_by.employee_id.parent_id.id == i.env.user.employee_id.id
+                    i.is_atasan = True
+                else:
+                    i.is_atasan = False
+            else:
+                i.is_atasan = False
+
 
     @api.depends("line_ids", "line_ids.estimated_cost")
     def _compute_estimated_cost(self):
@@ -270,13 +281,13 @@ class PurchaseRequest(models.Model):
         self.ensure_one()
         return self.state == "draft"
 
-    def unlink(self):
-        for request in self:
-            if not request._can_be_deleted():
-                raise UserError(
-                    _("You cannot delete a purchase request which is not draft.")
-                )
-        return super(PurchaseRequest, self).unlink()
+    # def unlink(self):
+    #     for request in self:
+    #         if not request._can_be_deleted():
+    #             raise UserError(
+    #                 _("You cannot delete a purchase request which is not draft.")
+    #             )
+    #     return super(PurchaseRequest, self).unlink()
 
     def button_draft(self):
         self.mapped("line_ids").do_uncancel()
