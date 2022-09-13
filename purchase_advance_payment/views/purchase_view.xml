@@ -13,7 +13,7 @@
                     <field name="account_payment_ids" nolabel="1" colspan="4" context="{'form_view_ref': 'account.view_account_payment_form','tree_view_ref': 'account.view_account_payment_tree'}" />
                 </page>
             </notebook>
-            <field name="amount_totax_totals_jsontal" position="after">
+            <field name="tax_totals_json" position="after">
                 <div class="oe_subtotal_footer_separator oe_inline o_td_label">
                     <label for="amount_residual" />
                 </div>
