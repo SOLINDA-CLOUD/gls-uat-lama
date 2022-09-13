@@ -30,8 +30,8 @@
                     <button name="button_procurement" states="to_approve_gm" string="Approve" type="object" class="oe_highlight" attrs="{'invisible':['|','|',('pre_order', '!=', False),('create_directly', '=', False)]}" groups="purchase_request.group_purchase_request_approval4" />
                     <button name="button_approved" states="to_approve_gm" string="Approve" type="object" class="oe_highlight" attrs="{'invisible':['|',('pre_order', '=', False)]}" groups="purchase_request.group_purchase_request_approval4" />
                     <!-- ======== PURCHASE REQUEST STEP 4 Direksi/Dirut========== -->
-                    <button name="button_procurement" states="approved" string="Approve" type="object" class="oe_highlight" attrs="{'invisible':['|',('qty_is_bigger', '=', False)]}" groups="purchase_request.group_purchase_request_approval5" />
-                    <button name="button_procurement" states="approved" string="Approve" type="object" class="oe_highlight" attrs="{'invisible':['|',('qty_is_bigger', '!=', False)]}" groups="purchase_request.group_purchase_request_approval6" />
+                    <button name="button_procurement" states="approved" string="Approve" type="object" class="oe_highlight" attrs="{'invisible':['|','|',('qty_is_bigger', '=', False),('create_directly', '!=', False)]}" groups="purchase_request.group_purchase_request_approval5" />
+                    <button name="button_procurement" states="approved" string="Approve" type="object" class="oe_highlight" attrs="{'invisible':['|','|',('pre_order', '=', False),('create_directly', '=', False)]}" groups="purchase_request.group_purchase_request_approval6" />
                     <!-- ======== =============================== ========== -->
                     <button name="button_done" states="procurement" string="Done" type="object" class="oe_highlight" groups="purchase_request.group_purchase_request_procurement" />
                 </header>
