@@ -14,7 +14,7 @@
                     <!-- <button name="button_procurement" states="approved" string="Approve" type="object" class="oe_highlight" groups="purchase_request.group_purchase_request_approval3" attrs="{'invisible':['|',('pre_order', '=', True)]}"/> -->
                     <!-- <button name="button_procurement" states="approved" string="Approve" type="object" class="oe_highlight" groups="purchase_request.group_purchase_request_approval4" attrs="{'invisible':['|',('pre_order', '=', False)]}"/> -->
 
-                    <button name="%(action_purchase_request_line_make_purchase_order)d" states="to_approve_gm,approved" string="Create RFQ" type="action" groups="purchase_request.group_purchase_request_procurement"/>
+                    <button name="%(action_purchase_request_line_make_purchase_order)d" states="procurement" string="Create RFQ" type="action" groups="purchase_request.group_purchase_request_procurement"/>
                     <button name="button_rejected" states="to_approve,approved,to_approve_gm,procurement" string="Reject" type="object" groups="purchase_request.group_purchase_request_manager" />
                     <field name="state" widget="statusbar" statusbar_visible="draft,to_approve,to_approve_gm,approved,procurement,done" statusbar_colors='{"approved":"blue"}'/>
                     <!-- attrs="{'invisible':['|',('create_directly', '!=', False)]}" -->
