@@ -115,7 +115,7 @@ class PurchaseAdvancePaymentInv(models.TransientModel):
                         "name": name,
                         "account_id": account_id,
                         "price_unit": amount,
-                        "quantity": 1.0,
+                        "quantity": 0.0,
                         "product_uom_id": product.uom_id.id,
                         "product_id": product.id,
                         "purchase_line_id": po_line.id,
