@@ -194,7 +194,7 @@ class PurchaseAdvancePaymentInv(models.TransientModel):
                 {
                     "name": _("Advance: %s") % (time.strftime("%m %Y"),),
                     "price_unit": amount,
-                    "product_qty": 0.0,
+                    "product_qty": 1,
                     "order_id": order.id,
                     "product_uom": product.uom_id.id,
                     "product_id": product.id,
