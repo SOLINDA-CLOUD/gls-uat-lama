@@ -115,7 +115,7 @@ class PurchaseAdvancePaymentInv(models.TransientModel):
                         "name": name,
                         "account_id": account_id,
                         "price_unit": amount,
-                        "quantity": 0.0,
+                        "quantity": 1.0,
                         "product_uom_id": product.uom_id.id,
                         "product_id": product.id,
                         "purchase_line_id": po_line.id,
@@ -143,6 +143,19 @@ class PurchaseAdvancePaymentInv(models.TransientModel):
             subtype_id=self.env.ref("mail.mt_note").id,
         )
         return invoice
+
+    def _prepare_advance_purchase_line(self, order, product, tax_ids, amount):
+        return {
+            "name": _("Advance: %s") % (time.strftime("%m %Y"),),
+            "price_unit": amount,
+            "product_qty": 0.0,
+            "order_id": order.id,
+            "product_uom": product.uom_id.id,
+            "product_id": product.id,
+            "taxes_id": [(6, 0, tax_ids)],
+            "date_planned": datetime.today().strftime(DEFAULT_SERVER_DATETIME_FORMAT),
+            "is_deposit": True,
+        }
 
     def create_invoices(self):
         Purchase = self.env["purchase.order"]
@@ -190,21 +203,10 @@ class PurchaseAdvancePaymentInv(models.TransientModel):
             else:
                 tax_ids = taxes.ids
             context = {"lang": order.partner_id.lang}
-            po_line = PurchaseLine.create(
-                {
-                    "name": _("Advance: %s") % (time.strftime("%m %Y"),),
-                    "price_unit": amount,
-                    "product_qty": 1,
-                    "order_id": order.id,
-                    "product_uom": product.uom_id.id,
-                    "product_id": product.id,
-                    "taxes_id": [(6, 0, tax_ids)],
-                    "date_planned": datetime.today().strftime(
-                        DEFAULT_SERVER_DATETIME_FORMAT
-                    ),
-                    "is_deposit": True,
-                }
+            adv_po_line_dict = self._prepare_advance_purchase_line(
+                order, product, tax_ids, amount
             )
+            po_line = PurchaseLine.create(adv_po_line_dict)
             del context
 
             if self._context.get("create_bills", False):
