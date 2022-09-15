@@ -106,8 +106,8 @@ class ReportListTenderExcel(models.AbstractModel):
                 'total_price_subtotal_tax': sum([datas.price_tax for datas in rec.order_line]),
             })
             for datas in rec.order_line:
-                sheet.write(column[column1] + str(index+1), str(datas.price_unit), format_table_angka)
-                sheet.write(column[column2] + str(index+1), str(datas.price_subtotal), format_table_angka)
+                sheet.write(column[column1] ,str(index), str(datas.price_unit), format_table_angka)
+                sheet.write(column[column2],str(index), str(datas.price_subtotal), format_table_angka)
                 index += 1
 
                 if datas.product_id.name not in data_prod:
@@ -122,9 +122,11 @@ class ReportListTenderExcel(models.AbstractModel):
                     nomor += 1
             index = 10
                 
+            
             column1 += 2
             column2 += 2
         
+
         ind = 10
         for rec in data_product:
             sheet.write('B'+ str(ind), rec['nomor'], format_table_nomor)
