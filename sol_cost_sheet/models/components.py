@@ -46,17 +46,37 @@ class ComponentComponent(models.Model):
     
     def get_items_rab(self):
         master = self.env['master.item'].search([('product_id', '=', self.product_id.id)])
-        
+        data = []
         if master:
-            self.write({
-                'item_ids':[(0,0,{
+            for item in master[0].item_line_ids:
+                if item.product_id.detailed_type != 'service':
+                    stock_valuation = item.product_id.stock_valuation_layer_ids.sorted(reverse=True)
+                else:
+                    stock_valuation = item.env['purchase.order.line'].search([('product_id', '=', item.product_id.id),('po_confirm_date', '<=', fields.Date.context_today(i))],order="po_confirm_date desc",limit=1)
+                if stock_valuation:
+                    cost = stock_valuation[0].unit_cost if stock_valuation else 0.0
+                else:
+                    cost = 0
+                data.append((0,0,{
                     'cost_sheet_id': self.cost_sheet_id.id,
                     'product_id': item.product_id.id,
                     'name': item.product_id.display_name,
                     'uom_id': item.product_id.uom_id.id,
-                    'category_id': self.category_id.id
-                }) for item in master[0].item_line_ids]
-            })
+                    'category_id': self.category_id.id,
+                    'rfq_price': cost,
+                }))
+            self.write({'item_ids':data})
+
+            # self.write({
+            #     'item_ids':[(0,0,{
+            #         'cost_sheet_id': self.cost_sheet_id.id,
+            #         'product_id': item.product_id.id,
+            #         'name': item.product_id.display_name,
+            #         'uom_id': item.product_id.uom_id.id,
+            #         'category_id': self.category_id.id,
+            #         'rfq_price': cost,
+            #     }) for item in master[0].item_line_ids]
+            # })
         else:
             raise ValidationError('Master data items for Component %s does not exist'%(self.product_id.display_name))
     
