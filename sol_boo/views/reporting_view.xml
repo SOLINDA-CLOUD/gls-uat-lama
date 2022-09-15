@@ -20,7 +20,8 @@
                     </group>
                     <group>
                         <field name="product_ids" widget="many2many_tags" attrs="{'invisible' : [('type','!=','chemical_catridge')]}"/>
-                        <field name="warehouse_id" widget="many2many_tags" attrs="{'invisible' : [('type','!=','water_prod')]}"/>
+                        <field name="warehouse_id" widget="many2many_tags" />
+                        <!-- <field name="warehouse_id" widget="many2many_tags" attrs="{'invisible' : [('type','!=','water_prod')]}"/> -->
                     </group>
                     <footer>
                         <button name="download_report" string="Print" type="object" class="btn-primary"/>
@@ -37,6 +38,26 @@
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>
+
+        <report
+            id="sol_boo.gls_xlsx"
+            model="reporting.boo"
+            string="Water Production Reporting"
+            report_type="xlsx"
+            name="sol_boo.gls_report_xls.xlsx"
+            file="Water Production Report.xlsx"
+            menu="False"
+            attachment_use="False"/>
+
+        <report
+            id="sol_boo.chemical_gls_xlsx"
+            model="reporting.boo"
+            string="Chemical Cartridge Consumption Reporting"
+            report_type="xlsx"
+            name="sol_boo.chemical_gls_report_xls.xlsx"
+            file="Chemical Cartridge Consumption Report.xlsx"
+            menu="False"
+            attachment_use="False"/>
 
     </data>
 </odoo>

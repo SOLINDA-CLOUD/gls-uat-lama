@@ -21,7 +21,7 @@
                                 <tree>
                                     <field name="name" />
                                     <field name="category_id" optional="show"/>
-                                    <field name="equipment_assign_to" optional="show"/>
+                                    <!-- <field name="equipment_assign_to" optional="show"/> -->
                                     <field name="maintenance_team_id" optional="show"/>
                                     <field name="technician_user_id" optional="show"/>
                                     <field name="location" optional="hide"/>

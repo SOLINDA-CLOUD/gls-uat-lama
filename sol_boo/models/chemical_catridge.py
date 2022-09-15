@@ -33,7 +33,8 @@ class ChemicalCatridge(models.Model):
     def _onchange_product_id(self):
         for i in self:
             if i.product_id and i.warehouse_id and i.date:
-                first_day = datetime.strptime(i.date, '%d %b %Y').replace(day=1)
+                first_day = i.date.replace(day=1)
+                # first_day = datetime.strptime(i.date, '%d %b %Y').replace(day=1)
                 sisa_stock = self.env["chemical.catridge"].search([("product_id", "=", i.product_id.id),("warehouse_id", "=", i.warehouse_id.id),('date','<',i.date )],limit = 1, order = 'date desc')
                 if sisa_stock:
                     i.stock_awal = sisa_stock.sisa_stock
