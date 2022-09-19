@@ -118,19 +118,12 @@ class CostSheetXlsx(models.AbstractModel):
             row += 1
             no += 1
 
-        no = 1
-        sub_no = 1
         data_ga = self.env['ga.project'].search(domain)
-        count = 1
+        worksheet.write(row, 1, no, style_basic_bold_center)
+        worksheet.write(row, 2, "GA Project", style_basic_bold)
         for rec in data_ga:
-            if count != 1:
-                no = 1
-                row += 5
-            count += 1
             # create_header(row - 2, 0, rec.project_id.name)
             # worksheet.write(row, 0, rec.project_id.code or "-", style_basic_bold_center)
-            worksheet.write(row, 1, no, style_basic_bold_center)
-            worksheet.write(row, 2, rec.product_id.name, style_basic_bold)
             worksheet.write(row + 1, 2, "%s.%s" % (no,sub_no), style_basic_bold_center)
             worksheet.write(row + 1, 3, rec.product_id.name, style_basic_bold)
             worksheet.write(row + 1, 5, rec.product_qty, style_basic_center)
