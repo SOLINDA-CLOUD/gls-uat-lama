@@ -118,7 +118,7 @@ class CostSheetXlsx(models.AbstractModel):
             row += 1
             no += 1
 
-        data_ga = self.env['rap.category'].search(domain, order='project_id asc')
+        data_ga = self.env['ga.project'].search(domain, order='project_id asc')
         worksheet.write(row, 1, no, style_basic_bold_center)
         worksheet.write(row, 2, "GA Project", style_basic_bold)
         for rec in data_ga:
