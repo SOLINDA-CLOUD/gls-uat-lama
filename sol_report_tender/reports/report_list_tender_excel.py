@@ -29,7 +29,7 @@ class ReportListTenderExcel(models.AbstractModel):
 
     def generate_xlsx_report(self, workbook, data, obj):
         sheet = workbook.add_worksheet('Report')
-
+    
         # xlwt
         format_header = workbook.add_format({'font_name': 'Times', 'bold': True, 'align': 'center', 'size': 16, 'valign': 'vcenter', })
         format_header_2 = workbook.add_format({'font_name': 'Times', 'bold': True, 'align': 'center', 'size': 11, 'valign': 'vcenter', })
@@ -106,9 +106,11 @@ class ReportListTenderExcel(models.AbstractModel):
                 'total_price_subtotal_tax': sum([datas.price_tax for datas in rec.order_line]),
             })
             for datas in rec.order_line:
+                print("==============COL===================",column[column1] +str(index+1))
+                print("================PRICE=================",str(datas.price_unit))
                 sheet.write(column[column1] +str(index+1), str(datas.price_unit), format_table_angka)
                 sheet.write(column[column2]+str(index+1), str(datas.price_subtotal), format_table_angka)
-                index += 1
+                index += 10
 
                 if datas.product_id.name not in data_prod:
                     data_prod.append(datas.product_id.name)

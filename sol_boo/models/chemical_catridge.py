@@ -64,6 +64,6 @@ class ChemicalCatridge(models.Model):
     @api.depends('stock_awal','penerimaan','penuangan','pemakaian','cleaning_basa','adj_over_loss','dosing_stroke')
     def _compute_sisa_stock(self):
         for i in self:
-            i.sisa_stock = i.stock_awal + i.penerimaan - i.penuangan - i.pemakaian - i.cleaning_basa - i.adj_over_loss - i.dosing_stroke or 0
+            i.sisa_stock = i.stock_awal + i.penerimaan - i.penuangan - i.cleaning_basa - i.adj_over_loss - i.dosing_stroke or 0
 
     
