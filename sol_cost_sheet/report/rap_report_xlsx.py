@@ -122,15 +122,26 @@ class CostSheetXlsx(models.AbstractModel):
         worksheet.write(row, 1, no, style_basic_bold_center)
         worksheet.write(row, 2, "GA Project", style_basic_bold)
         for rec in data_ga:
-            # create_header(row - 2, 0, rec.project_id.name)
-            # worksheet.write(row, 0, rec.project_id.code or "-", style_basic_bold_center)
-            # worksheet.write(row + 1, 2, "%s.%s" % (no,sub_no), style_basic_bold_center)
-            # worksheet.write(row + 1, 3, rec.product_id.name, style_basic_bold)
-            # worksheet.write(row + 1, 5, rec.product_qty, style_basic_center)
-            # worksheet.write(row + 1, 6, rec.total_price, style_basic_center)
-            worksheet.write(row, 3, "GA Project", style_basic_bold)
+            worksheet.write(row + 1, 2, "%s.%s" % (no,sub_no), style_basic_bold_center)
+            worksheet.write(row + 1, 3, rec.product_id.name, style_basic_bold)
+            worksheet.write(row + 1, 5, rec.product_qty, style_basic_center)
+            worksheet.write(row + 1, 6, rec.total_price, style_basic_center)
             sub_no += 1
             row += 1
         row += 1
         no += 1
+
+        data_ga = obj.project_ids.rap_id.waranty_line_ids
+        worksheet.write(row, 1, no, style_basic_bold_center)
+        worksheet.write(row, 2, "Waranty", style_basic_bold)
+        for rec in data_ga:
+            worksheet.write(row + 1, 2, "%s.%s" % (no,sub_no), style_basic_bold_center)
+            worksheet.write(row + 1, 3, rec.product_id.name, style_basic_bold)
+            worksheet.write(row + 1, 5, rec.product_qty, style_basic_center)
+            worksheet.write(row + 1, 6, rec.total_price, style_basic_center)
+            sub_no += 1
+            row += 1
+        row += 1
+        no += 1
+
 
