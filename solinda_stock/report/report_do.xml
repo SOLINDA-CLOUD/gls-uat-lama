@@ -74,22 +74,26 @@
                                 <tr style="height: 18px;">
                                     <td style="width: 8%; height: 19px;">Bill To :</td>
                                     <td style="width: 20%; height: 19px; border: 1px solid black; border-bottom: 1px solid transparent;">
-                                        <span t-field="doc.location_id"/>
+                                        <span t-field="doc.partner_id.name"/>
                                     </td>
                                 </tr>
                                 <tr style="height: 18px;">
                                     <td style="width: 8%; height: 18px;"></td>
-                                    <td style="width: 20%; height: 18px; border: 1px solid black;"></td>
+                                    <td style="width: 20%; height: 18px; border: 1px solid black;">
+                                        <span t-field="doc.partner_id.street"/>
+                                    </td>
                                 </tr>
                                     <tr style="height: 18px;">
                                     <td style="width: 8%; height: 19px;">Ship To :</td>
                                     <td style="width: 20%; height: 19px; border: 1px solid black; border-bottom: 1px solid transparent;">
-                                        <span t-field="doc.location_dest_id"/>
+                                        <span t-field="doc.patner_id.name"/>
                                     </td>
                                 </tr>
                                     <tr style="height: 18px;">
                                     <td style="width: 8%; height: 18px;"></td>
-                                    <td style="width: 20%; height: 18px; border: 1px solid black;"></td>
+                                    <td style="width: 20%; height: 18px; border: 1px solid black;">
+                                        <span t-field="doc.partner_id.street"/>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
