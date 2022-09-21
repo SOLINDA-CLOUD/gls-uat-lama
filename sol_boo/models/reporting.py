@@ -379,7 +379,7 @@ class ChemicalGlsReport(models.AbstractModel):
                 warehouse_ids = self.env['stock.location'].sudo().search([('id', 'in', warehouse)])
             else:
                 warehouse_ids = self.env['stock.location'].sudo().search([('usage', '=', 'internal')])
-            product = datas.get('product_id', False)
+            product = datas.get('product_ids', False)
             if product:
                 product_ids = self.env['product.product'].sudo().search([('id', 'in', product)])
             else:
