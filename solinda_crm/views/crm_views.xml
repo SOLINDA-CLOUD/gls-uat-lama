@@ -8,8 +8,8 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='stage_id']" position="after">
           <!-- Add your fields here -->
-          <field name="change_stage_time"/>
-          <field name="duration_change_stage" optional="show"/>
+          <field name="change_stage_time" widget="remaining_days"/>
+          <field name="duration_change_stage" invisible="1"/>
         </xpath>
 
       </field>
@@ -35,7 +35,7 @@
           </div>
           <div>
               Duration : 
-            <field name="duration_change_stage" force_save="1"/>
+            <field name="change_stage_time" widget="remaining_days" force_save="1"/>
           </div>
         </xpath>
       </field>

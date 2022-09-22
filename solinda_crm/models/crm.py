@@ -290,7 +290,7 @@ class CrmLead(models.Model):
     other_issue = fields.Binary('Other Issue/Other Concern')
 
     change_stage_time = fields.Datetime('Change Stage Time',store=True)
-    duration_change_stage = fields.Char(compute='_compute_duration_change_stage', string='Duration')
+    duration_change_stage = fields.Char(string='Duration')
     
     @api.onchange('stage_id')
     def _onchange_stagescrm_id(self):
