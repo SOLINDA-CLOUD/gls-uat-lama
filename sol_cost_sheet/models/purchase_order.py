@@ -19,6 +19,7 @@ class PurchaseOrderLine(models.Model):
 
     def _get_project_codepr(self):
         for i in self:
+            code = ''
             for gc in i.purchase_request_lines:
                 code = ''
                 if gc.request_id.project_code:
