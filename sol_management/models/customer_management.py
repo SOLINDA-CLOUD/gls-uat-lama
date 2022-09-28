@@ -147,7 +147,7 @@ class CustomerManagement(models.Model):
 
     ##Management Report
     final_score = fields.Float(readonly=True, store=True, string='Final Score')
-    final_rate_cust_cust = fields.Selection(point, readonly=True, string='Final Rate')
+    final_rate_cust = fields.Selection(point, readonly=True, string='Final Rate')
     final_comment = fields.Char(string='Final Comment', states={'cancelled': [('readonly', True)]})
 
     def calculate(self):
@@ -211,7 +211,7 @@ class CustomerAdd(models.Model):
                 ('state', '=', 'approved')
             ])
             if record:
-                rec.visible_management = record.sorted('period_end', reverse=True)[0].final_rate_cust_cust 
+                rec.visible_management = record.sorted('period_end', reverse=True)[0].final_rate_cust 
             else:
                 rec.visible_management = False
 
