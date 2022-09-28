@@ -167,7 +167,7 @@ class CustomerManagement(models.Model):
                 count += rec.accuracy_score
                 sum_total += (int(rec.accuracy) * rec.accuracy_score)
             if count == 0:
-                rec.final_rate_cust = rec.point[0][0]
+                rec.final_rate_cust_cust = rec.point[0][0]
             if count >= 6 and count <= 9:
                 rec.final_rate_cust = rec.point[1][0]
             if count >= 10 and count <= 12:
