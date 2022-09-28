@@ -132,9 +132,8 @@
 
             <group string="Evaluation Report">
               <field name="final_score" style="font-weight: bold;"/>
-              <field name="final_rate" widget="priority"/>
+              <field name="final_rate" widget="priority" readonly="1"/>
               <field name="final_comment"/>
-              <!-- <field name="test" invisible="1"/> -->
             </group>
 
           </sheet>
@@ -159,9 +158,8 @@
           <field name="period_start" string="Period Start"/>
           <field name="period_end"/>
           <field name="final_score"/>
-          <field name="final_rate" widget="priority"/>
+          <field name="final_rate" widget="priority" readonly="1"/>
           <field name="state"/>
-          <!-- <field name="test" invisible="1"/> -->
         </tree>
       </field>
     </record>
@@ -172,9 +170,7 @@
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field name="arch" type="xml">
         <xpath expr="//field[@name='vat']" position="after">
-          <field name="test" invisible="1"/>
-          <field name="visible_management" widget="priority" attrs="{'invisible': [('test', '=', False)]}"/>
-          <field name="visible_management_cust" widget="priority" attrs="{'invisible': [('test', '=', False)]}"/>
+          <field name="visible_management" widget="priority"/>
         </xpath>
       </field>
     </record>
