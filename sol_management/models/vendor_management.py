@@ -1,4 +1,3 @@
-from audioop import reverse
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -193,9 +192,12 @@ class VendorManagement(models.Model):
     final_score = fields.Float(readonly=True, store=True, string='Final Score')
     final_rate = fields.Selection(point, string='Final Rate')
     final_comment = fields.Char(string='Final Comment', states={'cancelled': [('readonly', True)]})
+    test = fields.Boolean(string="Test", default=False)
+
 
     def calculate(self):
         for rec in self:
+            # self.test = True
             count = 0
             sum_total = 0
             if rec.price_eval:
@@ -244,19 +246,3 @@ class VendorManagement(models.Model):
     #         self.calculate()
     #     return rec
 
-class VendorAdd(models.Model):
-    _inherit = 'res.partner'
-
-    visible_management = fields.Selection(VendorManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
-
-    @api.depends()
-    def _calculate_eval(self):
-        for rec in self:
-            record = self.env['vendor.management'].search([
-                ('vendor', '=', rec.id),
-                ('state', '=', 'approved')
-            ])
-            if record:
-                rec.visible_management = record.sorted('period_end', reverse=True)[0].final_rate 
-            else:
-                rec.visible_management = False
