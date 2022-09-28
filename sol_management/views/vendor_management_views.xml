@@ -132,7 +132,7 @@
 
             <group string="Evaluation Report">
               <field name="final_score" style="font-weight: bold;"/>
-              <field name="final_rate" widget="priority" readonly="1"/>
+              <field name="final_rate" widget="priority"/>
               <field name="final_comment"/>
             </group>
 
@@ -158,7 +158,7 @@
           <field name="period_start" string="Period Start"/>
           <field name="period_end"/>
           <field name="final_score"/>
-          <field name="final_rate" widget="priority" readonly="1"/>
+          <field name="final_rate" widget="priority"/>
           <field name="state"/>
         </tree>
       </field>
@@ -171,6 +171,7 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='vat']" position="after">
           <field name="visible_management" widget="priority"/>
+          <field name="visible_management_cust" widget="priority"/>
         </xpath>
       </field>
     </record>

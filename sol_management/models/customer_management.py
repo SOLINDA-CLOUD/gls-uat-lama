@@ -200,20 +200,20 @@ class CustomerManagement(models.Model):
     #         self.calculate()
     #     return rec
 
-class CustomerAdd(models.Model):
-    _inherit = 'res.partner'
+# class CustomerAdd(models.Model):
+#     _inherit = 'res.partner'
 
-    visible_management_cust = fields.Selection(CustomerManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
+#     visible_management_cust = fields.Selection(CustomerManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
 
-    @api.depends()
-    def _calculate_eval(self):
-        for rec in self:
-            record = self.env['customer.management'].search([
-                ('customer', '=', rec.id),
-                ('state', '=', 'approved')
-            ])
-            if record:
-                rec.visible_management_cust = record.sorted('period_end', reverse=True)[0].final_rate_cust 
-            else:
-                rec.visible_management_cust = False
+#     @api.depends()
+#     def _calculate_eval(self):
+#         for rec in self:
+#             record = self.env['customer.management'].search([
+#                 ('customer', '=', rec.id),
+#                 ('state', '=', 'approved')
+#             ])
+#             if record:
+#                 rec.visible_management_cust = record.sorted('period_end', reverse=True)[0].final_rate_cust 
+#             else:
+#                 rec.visible_management_cust = False
 

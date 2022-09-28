@@ -244,19 +244,19 @@ class VendorManagement(models.Model):
     #         self.calculate()
     #     return rec
 
-class VendorAdd(models.Model):
-    _inherit = 'res.partner'
+# class VendorAdd(models.Model):
+#     _inherit = 'res.partner'
 
-    visible_management = fields.Selection(VendorManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
+#     visible_management = fields.Selection(VendorManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
 
-    @api.depends()
-    def _calculate_eval(self):
-        for rec in self:
-            record = self.env['vendor.management'].search([
-                ('vendor', '=', rec.id),
-                ('state', '=', 'approved')
-            ])
-            if record:
-                rec.visible_management = record.sorted('period_end', reverse=True)[0].final_rate 
-            else:
-                rec.visible_management = False
+#     @api.depends()
+#     def _calculate_eval(self):
+#         for rec in self:
+#             record = self.env['vendor.management'].search([
+#                 ('vendor', '=', rec.id),
+#                 ('state', '=', 'approved')
+#             ])
+#             if record:
+#                 rec.visible_management = record.sorted('period_end', reverse=True)[0].final_rate 
+#             else:
+#                 rec.visible_management = False
