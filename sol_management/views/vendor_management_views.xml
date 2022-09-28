@@ -164,16 +164,16 @@
       </field>
     </record>
 
-    <!-- <record id="vendor_addition_management" model="ir.ui.view">
+    <record id="vendor_addition_management" model="ir.ui.view">
       <field name="name">Vendor Addition Management Feature</field>
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form"/>
       <field name="arch" type="xml">
-        <xpath expr="//field[@name='vat']" position="before">
+        <xpath expr="//field[@name='vat']" position="after">
           <field name="visible_management" widget="priority"/>
         </xpath>
       </field>
-    </record> -->
+    </record>
 
       
 

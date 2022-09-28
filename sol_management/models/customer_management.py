@@ -147,7 +147,7 @@ class CustomerManagement(models.Model):
 
     ##Management Report
     final_score = fields.Float(readonly=True, store=True, string='Final Score')
-    final_rate = fields.Selection(point, readonly=True, string='Final Rate')
+    final_rate_cust = fields.Selection(point, readonly=True, string='Final Rate')
     final_comment = fields.Char(string='Final Comment', states={'cancelled': [('readonly', True)]})
 
     def calculate(self):
@@ -167,13 +167,13 @@ class CustomerManagement(models.Model):
                 count += rec.accuracy_score
                 sum_total += (int(rec.accuracy) * rec.accuracy_score)
             if count == 0:
-                rec.final_rate = rec.point[0][0]
+                rec.final_rate_cust = rec.point[0][0]
             if count >= 6 and count <= 9:
-                rec.final_rate = rec.point[1][0]
+                rec.final_rate_cust = rec.point[1][0]
             if count >= 10 and count <= 12:
-                rec.final_rate = rec.point[2][0]
+                rec.final_rate_cust = rec.point[2][0]
             if count >= 13 and count <= 14:
-                rec.final_rate = rec.point[3][0]
+                rec.final_rate_cust = rec.point[3][0]
             else:
                 rec.final_score = count
 
@@ -194,7 +194,24 @@ class CustomerManagement(models.Model):
 
     # def write(self, vals):
     #     rec = super(CustomerManagement, self).write(vals)
-    #     if 'final_score' not in vals and 'final_rate' not in vals:
+    #     if 'final_score' not in vals and 'final_rate_cust' not in vals:
     #         self.calculate()
     #     return rec
+
+class CustomerAdd(models.Model):
+    _inherit = 'res.partner'
+
+    visible_management_cust = fields.Selection(CustomerManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
+
+    @api.depends()
+    def _calculate_eval(self):
+        for rec in self:
+            record = self.env['customer.management'].search([
+                ('customer', '=', rec.id),
+                ('state', '=', 'approved')
+            ])
+            if record:
+                rec.visible_management_cust = record.sorted('period_end', reverse=True)[0].final_rate_cust 
+            else:
+                rec.visible_management_cust = False
 
