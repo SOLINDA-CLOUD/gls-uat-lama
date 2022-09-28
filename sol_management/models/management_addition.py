@@ -7,7 +7,7 @@ class VendorAdd(models.Model):
 
     visible_management = fields.Selection(vm.VendorManagement.point, string='Last Management Vendor', compute='_calculate_eval', readonly=True)
     visible_management_cust = fields.Selection(cm.CustomerManagement.point, string='Last Management Customer', compute='_calculate_eval_cust', readonly=True)
-    test = fields.Boolean(string="Test", default=False)
+    # test = fields.Boolean(string="Test", default=False)
     
     @api.depends()
     def _calculate_eval(self):
