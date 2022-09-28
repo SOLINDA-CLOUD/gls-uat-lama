@@ -172,8 +172,10 @@ class CustomerManagement(models.Model):
                 rec.final_rate_cust = rec.point[1][0]
             if count >= 10 and count <= 12:
                 rec.final_rate_cust = rec.point[2][0]
-            if count >= 13 and count <= 14:
+            if count >= 13 and count <=20:
                 rec.final_rate_cust = rec.point[3][0]
+            if count == 0:
+                rec.final_rate_cust = rec.point[0][0]
             else:
                 rec.final_score = count
 
@@ -197,21 +199,4 @@ class CustomerManagement(models.Model):
     #     if 'final_score' not in vals and 'final_rate_cust' not in vals:
     #         self.calculate()
     #     return rec
-
-class CustomerAdd(models.Model):
-    _inherit = 'res.partner'
-
-    visible_management_cust = fields.Selection(CustomerManagement.point, string='Last Management', compute='_calculate_eval', readonly=True)
-
-    @api.depends()
-    def _calculate_eval(self):
-        for rec in self:
-            record = self.env['customer.management'].search([
-                ('customer', '=', rec.id),
-                ('state', '=', 'approved')
-            ])
-            if record:
-                rec.visible_management_cust = record.sorted('period_end', reverse=True)[0].final_rate_cust 
-            else:
-                rec.visible_management_cust = False
 

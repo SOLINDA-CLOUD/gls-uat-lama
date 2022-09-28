@@ -171,6 +171,7 @@
       <field name="arch" type="xml">
         <xpath expr="//field[@name='vat']" position="after">
           <field name="visible_management" widget="priority"/>
+          <field name="visible_management_cust" widget="priority"/>
         </xpath>
       </field>
     </record>
