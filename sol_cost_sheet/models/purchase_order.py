@@ -18,9 +18,9 @@ class PurchaseOrderLine(models.Model):
     po_confirm_date = fields.Date('Po Confirm Date')    
 
     def _get_project_codepr(self):
-        code = ''
         for i in self:
             for gc in i.purchase_request_lines:
+                code = ''
                 if gc.request_id.project_code:
                     code += '('+gc.request_id.project_code+')'    
                 else:
