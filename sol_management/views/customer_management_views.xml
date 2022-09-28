@@ -108,7 +108,7 @@
 
             <group string="Evaluation Report">
               <field name="final_score" style="font-weight: bold;"/>
-              <field name="final_rate" widget="priority"/>
+              <field name="final_rate_cust" widget="priority"/>
               <field name="final_comment"/>
             </group>
 
@@ -134,7 +134,7 @@
           <field name="period_start" string="Period Start"/>
           <field name="period_end"/>
           <field name="final_score"/>
-          <field name="final_rate" widget="priority"/>
+          <field name="final_rate_cust" widget="priority"/>
           <field name="state"/>
         </tree>
       </field>
