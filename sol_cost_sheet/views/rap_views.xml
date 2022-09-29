@@ -171,7 +171,7 @@
                             <field name="product_id" readonly="1" />
                             <field name="rap_state" invisible="1" />
                         </group>
-                        <field name="item_ids" context="{'default_category_id':parent.category_id,'default_rap_id':parent.rap_id,'default_cost_sheet_id':False}" attrs="{'readonly':[('rap_state','!=','draft')]}" widget="section_and_note_one2many">
+                        <field name="item_ids" context="{'default_category_id':parent.category_id,'default_rap_id':parent.rap_id,'default_cost_sheet_id':False}" attrs="{'readonly':['|',('rap_state','!=','draft'),('rap_state','!=','revisied')]}" widget="section_and_note_one2many">
                             <tree editable="bottom">
                                 <control>
                                     <create name="add_product_control" string="Add a product"/>
@@ -217,7 +217,7 @@
                             <field name="product_id" readonly="1" />
                             <field name="rap_state" invisible="1" />
                         </group>
-                        <field name="item_ids" context="{'default_revisied':True,'default_category_id':parent.category_id,'default_cost_sheet_id':False,'default_rap_id':parent.rap_id}" attrs="{'readonly':[('rap_state','!=','revisied')]}" widget="section_and_note_one2many">
+                        <field name="item_ids" context="{'default_revisied':True,'default_category_id':parent.category_id,'default_cost_sheet_id':False,'default_rap_id':parent.rap_id}" attrs="{'readonly':['|',('rap_state','!=','draft'),('rap_state','!=','revisied')]}" widget="section_and_note_one2many">
                             <tree editable="bottom">
                                 <control>
                                     <create name="add_product_control" string="Add a product"/>
