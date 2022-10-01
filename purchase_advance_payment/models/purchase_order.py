@@ -94,7 +94,7 @@ class PurchaseOrder(models.Model):
                 _logger.info("DEBUG PO NAME========================",order.name)
 
                 has_due_amount = float_compare(
-                    amount_residual, 0.0, precision_rounding=order.partner_id.property_purchase_currency_id.rounding)
+                    amount_residual, 0.0, precision_rounding=order.partner_id.property_purchase_currency_id.rounding or precision_rounding=order.currency_id.rounding)
                 
                 if has_due_amount <= 0:
                     payment_state = "paid"
