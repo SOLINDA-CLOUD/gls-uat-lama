@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models
 from odoo.tools import float_compare
+_logger = logging.getLogger(__name__)
 
 
 class PurchaseOrder(models.Model):
@@ -88,8 +89,11 @@ class PurchaseOrder(models.Model):
             amount_residual = order.amount_total - advance_amount - invoice_paid_amount
             payment_state = "not_paid"
             if mls or order.invoice_ids:
+                print("====================================",order.name)
+                _logger.info("DEBUG PO NAME========================",order.name))
+
                 has_due_amount = float_compare(
-                    amount_residual, 0.0)
+                    amount_residual, 0.0, precision_rounding=order.partner_id.property_purchase_currency_id.rounding)
                 
                 if has_due_amount <= 0:
                     payment_state = "paid"
