@@ -3,6 +3,7 @@
 
 from odoo import api, fields, models
 from odoo.tools import float_compare
+import logging
 _logger = logging.getLogger(__name__)
 
 
