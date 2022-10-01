@@ -105,10 +105,10 @@ class ReportListTenderExcel(models.AbstractModel):
                 'total_price_subtotal': sum([datas.price_subtotal for datas in rec.order_line]),
                 'total_price_subtotal_tax': sum([datas.price_tax for datas in rec.order_line]),
             })
+            # Harga dan total
             for datas in rec.order_line:
-                sheet.write(column[column1] +str(index), str(datas.price_unit), format_table_angka)
-                sheet.write(column[column2]+str(index), str(datas.price_subtotal), format_table_angka)
-                index += 1
+                # sheet.write(column[column1] +str(index), str(datas.price_unit), format_table_angka)
+                # sheet.write(column[column2]+str(index), str(datas.price_subtotal), format_table_angka)
 
                 if datas.product_id.name not in data_prod:
                     data_prod.append(datas.product_id.name)
@@ -117,22 +117,33 @@ class ReportListTenderExcel(models.AbstractModel):
                         'nama_product': datas.product_id.name,
                         'qty': datas.product_qty,
                         'uom': datas.product_uom.name,
+                        'price_unit': datas.price_unit,
+                        'price_subtotal': datas.price_subtotal,
+                        'column1': column[column1] ,
+                        'column2': column[column2] ,
+                        'index': str(index),
                     })
-
                     nomor += 1
+                # column1 += 2
+                # column2 += 2
+
+                index += 1
             index = 10
-                
-            
             column1 += 2
             column2 += 2
         
 
         ind = 10
+        print("===DATA PRODUK ============",data_product)
         for rec in data_product:
             sheet.write('B'+ str(ind), rec['nomor'], format_table_nomor)
             sheet.write('C'+ str(ind), rec['nama_product'], format_table)
             sheet.write('D'+ str(ind), rec['qty'], format_table_nomor)
             sheet.write('E'+ str(ind), rec['uom'], format_table_nomor)
+            sheet.write(rec['column1']+str(ind), rec['price_unit'], format_table_nomor)
+            sheet.write(rec['column2']+str(ind), rec['price_subtotal'], format_table_nomor)
+            # sheet.write(rec['column1']+str(int(rec['index'])+rec['nomor']-1), rec['price_unit'], format_table_nomor)
+            # sheet.write(rec['column2']+str(int(rec['index'])+rec['nomor']-1), rec['price_subtotal'], format_table_nomor)
 
             ind += 1
 
